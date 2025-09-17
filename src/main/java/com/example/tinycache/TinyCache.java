@@ -68,13 +68,10 @@ public class TinyCache<K, V> implements Cache<K, V> {
 
     @Override
     public V remove(K key) {
-        if (key == null) {
-            throw new IllegalArgumentException("key must not null");
-        }
+        if (key == null) throw new IllegalArgumentException("key must not null");
         CacheEntry<V> removed = map.remove(key);
-        if (removed == null) {
-            throw new NoSuchElementException("No entry found for key: " + key);
-        }
+        if (removed == null) throw new NoSuchElementException("No entry found for key: " + key);
+
         totalValueSize -= removed.getApproxWeight();
         return removed.getValue();
     }
