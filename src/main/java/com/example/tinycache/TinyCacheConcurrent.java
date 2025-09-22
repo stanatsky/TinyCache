@@ -55,9 +55,9 @@ public class TinyCacheConcurrent<K, V> implements Cache<K, V> {
     @Override
     public void put(K key, V value) {
         if (key == null || value == null) throw new IllegalArgumentException("key and value must not be null");
+        int weight = weigher.weigh(value);
+        CacheEntry<V> newEntry = new CacheEntry<>(value, weight);
         synchronized (this) {
-            int weight = weigher.weigh(value);
-            CacheEntry<V> newEntry = new CacheEntry<>(value, weight);
             CacheEntry<V> previous = map.put(key, newEntry);
             if (previous != null) {
                 totalValueSize -= previous.getApproxWeight();
