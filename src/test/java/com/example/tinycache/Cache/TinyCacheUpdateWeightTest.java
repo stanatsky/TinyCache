@@ -1,4 +1,4 @@
-package com.example.tinycache.TC;
+package com.example.tinycache.Cache;
 
 import com.example.tinycache.TinyCache;
 import com.example.tinycache.TinyCacheMetrics;
